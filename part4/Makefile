@@ -11,7 +11,7 @@ OCAMLBUILDFLAGS:=-classic-display -j 0 -cflags -w,@a-4
 
 export OCAMLPATH=/usr/lib/ocaml/llvm-$(LLVM_VERSION)
 
-tutorial04_OCAMLBUILDFLAGS:=-use-ocamlfind -pkgs llvm,llvm.analysis,llvm.target,llvm_X86
+tutorial04_OCAMLBUILDFLAGS:=-use-ocamlfind -pkgs llvm,llvm.analysis,llvm.bitwriter,llvm.target,llvm_X86
 
 
 

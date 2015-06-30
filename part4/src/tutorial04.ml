@@ -38,5 +38,9 @@ let _ =
   let _ = build_ret (const_int i32_t 0) llbuilder in
 
   Llvm_analysis.assert_valid_module llm ;
-  dump_module llm ;
+  let _ =
+    if Array.length Sys.argv > 1
+    then Llvm_bitwriter.write_bitcode_file llm Sys.argv.(1) |> ignore
+    else dump_module llm
+  in
   ()
