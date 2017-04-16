@@ -5,13 +5,14 @@ TOOLS:=tutorial01
 #TARGET:=native
 TARGET:=byte
 
-LLVM_VERSION := 3.5
+LLVM_VERSION := 3.8
+CLANG := clang-$(LLVM_VERSION)
 
 OCAMLBUILDFLAGS:=-classic-display -j 0 -cflags -w,@a-4
 
 export OCAMLPATH=/usr/lib/ocaml/llvm-$(LLVM_VERSION)
 
-tutorial01_OCAMLBUILDFLAGS:=-use-ocamlfind -pkgs llvm,llvm.bitreader
+tutorial01_OCAMLBUILDFLAGS:=-use-ocamlfind -pkgs llvm,llvm.bitreader -lflags -ccopt,-L/usr/lib/llvm-$(LLVM_VERSION)/lib
 
 
 
