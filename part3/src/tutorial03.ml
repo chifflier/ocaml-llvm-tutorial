@@ -12,5 +12,7 @@ let _ =
 
   let _ = build_ret (const_int i32_t 0) llbuilder in
 
-  dump_module llm ;
+  if Array.length Sys.argv > 1
+  then print_module Sys.argv.(1) llm
+  else dump_module llm ;
   ()
