@@ -33,12 +33,14 @@ default: $(TOOLS)
 $(TOOLS):
 	$(OCAMLBUILD) $(OCAMLBUILDFLAGS) $($@_OCAMLBUILDFLAGS) $($@_OCAMLBUILDFLAGS_$(TARGET)) -I $(SRC_DIR) -build-dir build/$@ $@.$(TARGET)
 
-run: $(TOOLS)
-	CAML_LD_LIBRARY_PATH=/usr/lib/ocaml/llvm-$(LLVM_VERSION) ./build/llvmBCTargetTriple/src/llvmBCTargetTriple.byte
+run: $(TOOLS) hello.bc
+	CAML_LD_LIBRARY_PATH=/usr/lib/ocaml/llvm-$(LLVM_VERSION) ./build/tutorial01/src/tutorial01.byte hello.bc
 
 clean: $(CLEAN_RULES)
+	-rm -f hello.bc
 
 $(CLEAN_RULES):
 	$(OCAMLBUILD) $(OCAMLBUILDFLAGS) -I $(SRC_DIR) -build-dir build/$(patsubst %-clean,%,$@) -clean $(patsubst %-clean,%,$@).$(TARGET)
 
-
+hello.bc: hello.c
+	$(CLANG) -c -emit-llvm $<
